@@ -36,9 +36,10 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
 
         pwd=os.getcwd()
 
+        # Concerning Step 3 
         if self.path == '/':
             try:
-                with open(pwd + "/2.1_Server/index4.html") as file:
+                with open(pwd + "/2.1_Server/index5.html") as file:
                     data = file.read()
 
                 self._set_response()
@@ -49,16 +50,12 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
 
             return
 
+        # Concerning Step 1 
         if '/bmi' in self.path:
             
-            # Sending an '200 OK' response
-            self.send_response(200)
+            self._set_response()   
 
-            # Setting the header
-            self.send_header("Content-type", "text/html")
-
-            # Whenever using 'send_header', you also have to call 'end_headers'
-            self.end_headers()
+            print(f"The self.path is {self.path}")
 
             query_components = parse_qs(urlparse(self.path).query)
 
@@ -78,6 +75,7 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
 
         bmi = 0
         
+        # Concerning Step 3 
         if '/bmi-ajax' in self.path:
             
             content_length = int(self.headers['Content-Length']) # <--- Gets the size of data
@@ -100,29 +98,17 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
 
             return
 
+        # Concerning Step 1 
         if '/bmi' in self.path:
             
             content_length = int(self.headers['Content-Length']) # <--- Gets the size of data
             post_data = self.rfile.read(content_length) # <--- Gets the data itself
+
             logging.info("POST request,\nPath: %s\nHeaders:\n%s\n\nBody:\n%s\n",str(self.path), str(self.headers), post_data.decode('utf-8'))
         
             self._set_response()     
 
             self.wfile.write(f'<html><body>POST request for {self.path} and params {post_data}</body></html>'.encode('utf-8'))
-            #self.wfile.write(f'<html><body>ANSWER IS BMI {bmi}, POST request for {self.path} and params {post_data}</body></html>'.encode('utf-8'))
-        
-            # pwd=os.getcwd()
-            # try:
-            #     with open(pwd + "/2.1_Server/resp/index4.html") as file:
-            #         data = file.read()
-
-            #     self._set_response()
-
-            #     # Whenever using 'send_header', you also have to call 'end_headers'
-            #     self.end_headers()
-            #     self.wfile.write(bytes(data, "utf8"))
-            # except:
-            #     self.wfile.write(bytes(error_msg, "utf8"))
 
         return
 
