@@ -9,3 +9,9 @@ Something more
 sudo apt install gnome-keyring -y
 
 It does not fail actually
+
+What is the status now?
+
+Did not see what you typed earlier
+
+still having errors
