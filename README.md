@@ -6,7 +6,7 @@ adding something then want to synch
 
 Something more 
 
-sudo apt install gnome-keyring gnupg2 pass -y
+NO need to run this: sudo apt install gnome-keyring gnupg2 pass -y
 
 It does not fail actually
 
