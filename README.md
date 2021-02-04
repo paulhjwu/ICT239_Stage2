@@ -15,3 +15,5 @@ What is the status now?
 Did not see what you typed earlier
 
 still having errors
+
+I am fine now
