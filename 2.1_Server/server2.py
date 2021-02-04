@@ -97,20 +97,6 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
                 bmi = weight / math.pow(height/100, 2)
 
             self.wfile.write(json.dumps({'bmi': bmi}).encode('utf-8'))
-            #self.wfile.write(f'<html><body>ANSWER IS BMI {bmi}, POST request for {self.path} and params {post_data}</body></html>'.encode('utf-8'))
-        
-            # pwd=os.getcwd()
-            # try:
-            #     with open(pwd + "/2.1_Server/resp/index4.html") as file:
-            #         data = file.read()
-
-            #     self._set_response()
-
-            #     # Whenever using 'send_header', you also have to call 'end_headers'
-            #     self.end_headers()
-            #     self.wfile.write(bytes(data, "utf8"))
-            # except:
-            #     self.wfile.write(bytes(error_msg, "utf8"))
 
             return
 
@@ -121,16 +107,6 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
             logging.info("POST request,\nPath: %s\nHeaders:\n%s\n\nBody:\n%s\n",str(self.path), str(self.headers), post_data.decode('utf-8'))
         
             self._set_response()     
-            #post_data_str = post_data.decode("utf-8")
-            # params = parse_qs(post_data_str)
-
-            # weight = float(params['weight'][0])
-            # height = float(params['height'][0])
-
-            # if params['unit'][0] == 'm':
-            #     bmi = weight / math.pow(height, 2)
-            # else:
-            #     bmi = weight / math.pow(height/100, 2)
 
             self.wfile.write(f'<html><body>POST request for {self.path} and params {post_data}</body></html>'.encode('utf-8'))
             #self.wfile.write(f'<html><body>ANSWER IS BMI {bmi}, POST request for {self.path} and params {post_data}</body></html>'.encode('utf-8'))
