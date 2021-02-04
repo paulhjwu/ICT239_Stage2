@@ -112,7 +112,7 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
             # except:
             #     self.wfile.write(bytes(error_msg, "utf8"))
 
-        return
+            return
 
         if '/bmi' in self.path:
             
@@ -120,19 +120,19 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
             post_data = self.rfile.read(content_length) # <--- Gets the data itself
             logging.info("POST request,\nPath: %s\nHeaders:\n%s\n\nBody:\n%s\n",str(self.path), str(self.headers), post_data.decode('utf-8'))
         
-            #self._set_response()     
-            post_data_str = post_data.decode("utf-8")
-            params = parse_qs(post_data_str)
+            self._set_response()     
+            #post_data_str = post_data.decode("utf-8")
+            # params = parse_qs(post_data_str)
 
-            weight = float(params['weight'][0])
-            height = float(params['height'][0])
+            # weight = float(params['weight'][0])
+            # height = float(params['height'][0])
 
-            if params['unit'][0] == 'm':
-                bmi = weight / math.pow(height, 2)
-            else:
-                bmi = weight / math.pow(height/100, 2)
+            # if params['unit'][0] == 'm':
+            #     bmi = weight / math.pow(height, 2)
+            # else:
+            #     bmi = weight / math.pow(height/100, 2)
 
-            # self.wfile.write(f'<html><body>POST request for {self.path} and params {post_data}</body></html>'.encode('utf-8'))
+            self.wfile.write(f'<html><body>POST request for {self.path} and params {post_data}</body></html>'.encode('utf-8'))
             #self.wfile.write(f'<html><body>ANSWER IS BMI {bmi}, POST request for {self.path} and params {post_data}</body></html>'.encode('utf-8'))
         
             # pwd=os.getcwd()
