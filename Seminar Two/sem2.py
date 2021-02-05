@@ -118,8 +118,8 @@ def q9():
               h_plus1 = 0
 
 
-  print("Clock time is ""{:02d}".format(h),":","{:02d}".format(m),":","{:02d}".format(s))
-  print("After 1 seconds the time is ""{:02d}".format(h_plus1),":","{:02d}".format(m_plus1),":","{:02d}".format(s_plus1))
+  print(f"Clock time is {h:02d}:{m:02d}:{s:02d}")
+  print(f"After 1 seconds the time is {h_plus1:02d}:{m_plus1:02d}:{s_plus1:02d}")
 
 #q9()
 
