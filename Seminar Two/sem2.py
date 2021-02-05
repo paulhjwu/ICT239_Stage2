@@ -121,4 +121,94 @@ def q9():
   print("Clock time is ""{:02d}".format(h),":","{:02d}".format(m),":","{:02d}".format(s))
   print("After 1 seconds the time is ""{:02d}".format(h_plus1),":","{:02d}".format(m_plus1),":","{:02d}".format(s_plus1))
 
-q9()
+#q9()
+
+#slide 29
+
+def main1():
+
+     a = float(input("Enter coefficient a: "))
+     b = float(input("Enter coefficient b: "))
+     c = float(input("Enter coefficient c: "))
+
+     discrim = b * b - 4 * a * c
+
+     if discrim < 0:
+          print("\nThe equation has no real roots!")
+     elif discrim == 0:
+          root = -b / (2 * a)
+          print("\nThere is a double root at", root)
+     else:
+          discRoot = math.sqrt(b * b - 4 * a * c)
+          root1 = (-b + discRoot) / (2 * a)
+          root2 = (-b - discRoot) / (2 * a)
+          print ("\nThe solutions are:", root1, root2 )
+
+#main1()
+
+def enrolOrNot():
+
+     gender, age = input("Enter your gender (f o m) and age: ").split(' ')
+
+     age = int(age)
+
+     if gender == "m":
+
+          if age < 18:   
+               print("Not enlisted yet")
+          elif age == 18:
+               print("To be enlisted")
+          else:
+               print("Already enlisted")
+     else:
+          print("No need to be enlisted")
+
+#enrolOrNot()
+
+def slide38():
+
+     num = int(input("Enter the number: "))
+
+     if num%2 == 0: 
+          if num >= 0:
+               print("+ve even")
+          else: 
+               print("-ve even")
+     else:
+          if num >=0:
+               print("+ve odd")
+          else:
+               print("-ve odd")
+
+#slide38()
+
+def slide39():
+
+     num = int(input("Enter the number: "))
+
+     if num%2 == 0 and num >= 0: 
+          print("+ve even")
+     elif num%2 == 0 and num <= 0: 
+          print("-ve even")
+     elif num%2 != 0 and num >= 0:
+          print("+ve odd")
+     else:
+          print("-ve odd")
+               
+#slide39()
+
+def slide77():
+
+     num1, num2 = input("Enter two numbers: ").split()
+
+     num1 =int(num1)
+     num2= int(num2)
+
+     if num1 % 2 == 0 and num2 % 2 == 0: 
+          print("Both numbers are even")
+     elif num1%2 != 0 and num2 % 2 != 0: 
+          print("Both numbers are odd")
+     else:
+          print("One number is even, the other is odd")
+
+slide77()
