@@ -1,0 +1,217 @@
+body {
+    background-color: #5eb9cb;
+    font-family: 'Dosis', sans-serif;
+
+}
+
+.outer-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+/*HEADER STYLES START*/
+
+.header-bar{
+    background-color: #31d8e1;
+    padding: 0px 50px;
+	width: 1000px;
+	height: 120px;
+	/* position: fixed; */
+	top: 0;
+	border-bottom: solid #242834 1px;
+	order: 0;
+}
+
+.nav{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: relative;
+    background-color: #31d8e1;
+}
+
+.nav-items ul{
+	padding: 0px;
+}
+
+.nav-items ul li{
+	display: inline-block;
+	font-size: 20px;
+	list-style: none;
+	font-family: 'Dosis', sans-serif;
+	color: #242834;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.logo{
+	/* background-image: url(pics/zGfNgLd.png); */
+	width: 300px;
+	height: 100px;
+	margin-top: 20px;
+	margin-left: 5px;
+	
+}
+
+/*HEADER STYLES End*/
+
+/* Container */
+
+.container {
+ /* margin: auto; */
+ 	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+    width: 1000px;
+    padding: 0px 50px;
+	background-color: #FDFCFB;
+/* 	text-align: center; */
+}
+
+
+/* Side Bar */
+
+.sideBar {
+	width: 20%;
+    border: none;
+    text-align: center;
+    padding: 20px 10px;
+}
+
+.fas {
+	color: #29553b;
+	font-size: 80px;
+}
+
+/* Page Specific */
+
+/* login & register */
+
+.item {
+    min-width: 600px;
+    margin: 20px;
+    padding: 20px;
+    box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 
+                0 1px 1px 0 rgba(0,0,0,.14), 
+                0 1px 3px 0 rgba(0,0,0,.12);
+}
+
+.break {
+    flex-basis: 100%;
+    height: 0;
+}
+
+form > div {
+    padding: 5px;
+}
+
+.item input {
+    width: 100%;
+    outline: none;
+    padding: 5px;
+    border: 0px;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 16px;
+}
+
+.item  input:hover {
+    border-bottom: 2px solid #4051b6;
+}
+  
+button, input[type="submit"] {
+    background-color: #4051b6;
+    color: #FFFFFF;
+    margin: 2px;
+    padding: 10px;
+    border: 0px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: #2cbcad;
+}
+
+
+.tabs {
+    margin-bottom: 20px;
+}
+
+a.tab {
+    display: inline-block;  /* required to set top and bottom padding */
+    width: 100px;
+    margin: 5px;
+    padding: 15px 40px;
+    text-align: center;
+    text-decoration: none;
+    border-bottom: 1px solid #e5e5e5;
+    color: #818181;
+}
+
+a.tab.active {
+    border-bottom: 2px solid #4051b6;
+    color: #000000;
+}
+
+/* Entries */
+
+.entireBox {
+  /* margin: auto; */
+  max-width: 600px;
+  width: 80%;
+  background-color: #FDFCFB;
+  text-align: center;
+  /* margin-top: 15vh; */
+  /* box-shadow: 5px 5px 10px; */
+  /* order: 2; */
+
+}
+
+.fieldsContainer {
+  text-align: center;
+}
+
+.entireBox > label {
+  display: inline-block; 
+  width: 50px; 
+  text-align: right; 
+  margin-right: 10px;
+
+}
+
+.inputType{
+  margin: 15px;
+}
+
+button {
+  margin: 15px;
+}
+
+.noWeightError {
+ margin: -5px;
+ opacity: 0
+    
+}
+
+.yesWeightError {
+ margin: -5px;
+ opacity: 1;
+  color: red;
+    
+}
+
+
+input.upload {
+    width: 100%;
+    outline: none;
+    padding: 5px;
+    border: 0px;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 16px;
+}
+
+input.upload input:hover {
+    border-bottom: 2px solid #4051b6;
+}
+ 
