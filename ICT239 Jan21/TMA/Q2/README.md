@@ -3,7 +3,7 @@ py# DCS Smart Trolley migration project
 # One-time setup
 
     $ cd <to-this-directory>
-    $ python3 -m venv evenv
+    $ python3 -m venv venv
     $ . venv/bin/activate
     $ pip install -r requirements.txt
 
