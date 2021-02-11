@@ -200,7 +200,7 @@ def recordings():
     
     recordings = get_recordings(_date)
 
-    return {'recordings': recordings}
+    return jsonify{'recordings': recordings}
 
 
 @app.route("/log", methods=['GET', 'POST'])
