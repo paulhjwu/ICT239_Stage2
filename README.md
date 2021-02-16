@@ -1,5 +1,7 @@
 # ICT239_Stage2
 
+OKay
+
 I change something here
 
 adding something then want to synch
