@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, request, flash
+from flask import Flask, render_template, redirect, url_for, request, flash, jsonify
 
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -118,7 +118,7 @@ def recordings():
             return {'error': 'date format should be YYYY-MM-DD'}, 400
     
     recordings = get_recordings(current_user.record['email'])
-    return {'recordings': recordings}
+    return jsonify({'recordings': recordings})
 
 @app.route("/log", methods=['GET', 'POST'])
 @login_required
@@ -148,7 +148,7 @@ def log():
         if bike != 0:
             totalCal += (run * 0.064 * bike)
         
-        return {'calorie': totalCal}
+        return jsonify({'calorie': totalCal})
 
 @app.route("/logout")
 @login_required
