@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BMI Calculator</title>
+    <link rel="stylesheet" href="../static/styles.css">
+
+    <script src="https://kit.fontawesome.com/81dbef326d.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div class="outer-container">
+	<div class="header-bar">
+    <nav class="nav">
+    
+      <div class="logo">
+       <svg width="200" height="100" >
+       <image width="80%" height="80%"  xlink:href="../static/logo.png"></image>
+       </svg>
+      </div>
+
+
+     <div class="nav-items">
+      <ul>
+        <li>
+          {% if not current_user.is_authenticated %}
+          <a href="{{ url_for('register') }}">
+              Register
+          </a>
+          {% endif %}
+         </li>
+         <li>
+          {% if not current_user.is_authenticated %}
+          <a href="{{url_for('login') }}">Login</a>
+          {% endif %}
+         </li>
+       <li>
+        {% if current_user.is_authenticated %}
+        <a href="/log">Log</a>
+        {% endif %}
+       </li>
+       <li>
+        {% if current_user.is_authenticated %}
+        <a href="/dashboard">Dashboard</a>
+        {% endif %}
+       </li>
+        <li>
+          {% if current_user.is_authenticated and (user_id == 'admin@fitwell.com')%}
+          <a href="/upload">Upload</a>
+          {% endif %}
+       </li> 
+      <li>
+        {% if current_user.is_authenticated %}
+        <a href="/logout">Logout</a>
+        {% endif %}
+        </li>
+      </ul>
+     </div>
+
+
+    </nav>
+                    
+    </div>
+
+    <div class="container">
+
+      <div class="item">
+        <div class="tabs">
+          <a class="tab" href="/">Login</a>
+          <a class="tab active" href="/register">Register</a>
+        </div>
+        <form action="/register" method="post">
+            <div><label for="email">Enter your email: </label></div>
+            <div><input type="email" name="email" id="email" required> </div>
+            <div><label for="email">Enter your password: </label></div>
+            <div><input type="password" name="password" id="password" required> </div>
+            <div><label for="weight">Enter your weight: </label></div>
+            <div><input type="weight" name="weight" id="weight" required> </div>
+            <div><label for="gender">Enter your gender: </label></div>
+            <div><input type="gender" name="gender" id="gender" required> </div>
+            <div><label>Date of birth</label></div>
+            <div><input type="datetime-local" name="datetime" required>e.g, 1989-01-22</div>
+            <div><input type="submit" value="REGISTER"/></div>
+        </form>
+    </div>
+      
+  </div>
+</div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="js.js"></script>
+</body>
+</html>

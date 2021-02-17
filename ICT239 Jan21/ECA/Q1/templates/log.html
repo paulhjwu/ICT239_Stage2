@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BMI Calculator</title>
+    <link rel="stylesheet" href="static/styles.css">
+    <script src="https://kit.fontawesome.com/81dbef326d.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div class="outer-container">
+	<div class="header-bar">
+
+    <nav class="nav">
+    
+      <div class="logo">
+       <svg width="200" height="100" >
+       <image width="80%" height="80%"  xlink:href="static/logo.png"></image>
+       </svg>
+      </div>
+
+      <div class="nav-items">
+        <ul>
+          <li>
+            {% if not current_user.is_authenticated %}
+            <a href="{{ url_for('register') }}">
+                Register
+            </a>
+            {% endif %}
+           </li>
+           <li>
+            {% if not current_user.is_authenticated %}
+            <a href="{{url_for('login') }}">Login</a>
+            {% endif %}
+           </li>
+         <li>
+          {% if current_user.is_authenticated %}
+          <a href="/log">Log</a>
+          {% endif %}
+         </li>
+         <li>
+          {% if current_user.is_authenticated %}
+          <a href="/dashboard">Dashboard</a>
+          {% endif %}
+         </li>
+          <li>
+            {% if current_user.is_authenticated and (user_id == 'admin@fitwell.com')%}
+            <a href="/upload">Upload</a>
+            {% endif %}
+         </li> 
+        <li>
+          {% if current_user.is_authenticated %}
+          <a href="/logout">Logout</a>
+          {% endif %}
+          </li>
+        </ul>
+       </div>
+    </nav>
+             
+                    
+    </div>
+
+    <div class="container">
+    <div class="sideBar">
+      <i class="fas fa-user"></i>
+      <div><p  class="theId"> My id is: {{user_id}} </p> </div>
+      <div> <p> My gender is {{gender}}</p> </div> 
+      <div> <p> My dob is {{dob}}</p> </div> 
+      <div> <p> My weight is {{weight}}</p> </div> 
+    </div>
+    <div class="entireBox">
+
+    <h1>Calorie Consumption</h2>
+    
+    <p>Input Date/Time, your weight, and time spent on each exercise.<p>
+    
+    <div class='fieldsContainer'>   
+   
+      <p id="weightError" class="noWeightError">Please input a weight greater than 0</p>
+        <div class='typeDiv'><label>Date & time</label><input class='inputType' type="datetime-local" name="datetime" required>e.g, 2021-01-22T15:00</div>
+        <div class='typeDiv'><label>Weight</label><input class='weight inputType' type="number" name="walking" min="0" max="9999" value='0'>kilograms</div>
+        <div class='typeDiv'><label>Walking</label><input class='walking inputType' type="number" name="walking" min="0" max="9999" value='0'>minutes</div>    
+        <div class='typeDiv'><label>Running</label><input class='running inputType' type="number" name="running" min="0" max="9999" value='0'>minutes</div>  
+        <div class='typeDiv'><label>Swimming</label><input class='swimming inputType' type="number" name="swimming" min="0" max="9999" value='0'>minutes</div>
+        <div class='typeDiv'><label>Bicycling</label><input class='bicycling inputType' type="number" name="bicycling" min="1" max="9999"  value='0'>minutes</div>
+    </div>
+    
+    <div>
+      <button onclick='postdata()'>Submit</button>
+    </div>
+      <h2 class='totalCalText'>Total calories to be consumed: 0</h2>
+  </div>
+  </div>
+</div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="../static/log.js"></script>
+</body>
+</html>

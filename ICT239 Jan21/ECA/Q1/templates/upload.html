@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BMI Calculator</title>
+    <link rel="stylesheet" href="../static/styles.css">
+    <script src="https://kit.fontawesome.com/81dbef326d.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <div class="outer-container">
+        <div class="header-bar">
+    
+        <nav class="nav">
+        
+          <div class="logo">
+           <svg width="200" height="100" >
+           <image width="80%" height="80%"  xlink:href="../static/logo.png"></image>
+           </svg>
+          </div>
+
+          <div class="nav-items">
+            <ul>
+              <li>
+                {% if not current_user.is_authenticated %}
+                <a href="{{ url_for('register') }}">
+                    Register
+                </a>
+                {% endif %}
+               </li>
+               <li>
+                {% if not current_user.is_authenticated %}
+                <a href="{{url_for('login') }}">Login</a>
+                {% endif %}
+               </li>
+             <li>
+              {% if current_user.is_authenticated %}
+              <a href="/log">Log</a>
+              {% endif %}
+             </li>
+             <li>
+              {% if current_user.is_authenticated %}
+              <a href="/dashboard">Dashboard</a>
+              {% endif %}
+             </li>
+              <li>
+                {% if current_user.is_authenticated and (user_id == 'admin@fitwell.com')%}
+                <a href="/upload">Upload</a>
+                {% endif %}
+             </li> 
+            <li>
+              {% if current_user.is_authenticated %}
+              <a href="/logout">Logout</a>
+              {% endif %}
+              </li>
+            </ul>
+          </div>      
+
+        </nav>
+                        
+        </div>
+    
+        <div class="container">
+        <div class="sideBar">
+          <i class="fas fa-user"></i>
+          <div> <p> My id is: {{user_id}} </p> </div>
+          <div> <p> My gender is {{gender}}</p> </div> 
+          <div> <p> My dob is {{dob}}</p> </div> 
+          <div> <p> My weight is {{weight}}</p> </div> 
+        </div>
+        <div class=entryBox>
+        <h1>Upload recordings</h1>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input name="type" type="hidden" value="upload">
+            <div>
+                <label for='upload'>Upload CSV file e.g. "admin@fitwell.com,2021-01-17T01:00,97,20,0,0,29"</label>
+                <input class="upload" id='upload' name='file' type='file' accept='.csv' required>
+            </div>
+            <div>
+                <input type="submit" value="Upload" type="Upload"/>
+            </div>
+        </form>
+      </div>
+        
+    </div>
+
+<script src="https://d3js.org/d3.v5.min.js"></script>
+
+
+</body>
+</html>

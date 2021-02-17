@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block sidebar %}
+        <div class="sideBar">
+          <i class="fas fa-user"></i>
+          <div> <p> My id is: {{user_id}} </p> </div>
+          <div> <p> My gender is {{gender}}</p> </div> 
+          <div> <p> My dob is {{dob}}</p> </div> 
+          <div> <p> My weight is {{weight}}</p> </div> 
+        </div>
+{% endblock %}
+
+{% block content %}
+        <div class=entryBox>
+        <h1>Upload recordings</h1>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input name="type" type="hidden" value="upload">
+            <div>
+                <label for='upload'>Upload CSV file e.g. "admin@fitwell.com,2021-01-17T01:00,97,20,0,0,29"</label>
+                <input class="upload" id='upload' name='file' type='file' accept='.csv' required>
+            </div>
+            <div>
+                <input type="submit" value="Upload" type="Upload"/>
+            </div>
+        </form>
+      </div>
+{% endblock %}

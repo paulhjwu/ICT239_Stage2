@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block sidebar %}
+<div class="sideBar">
+  <i class="fas fa-user"></i>
+  <div> <p class="theId"> My id is: {{user_id}} </p> </div>
+  <div> <p> My gender is {{gender}}</p> </div> 
+  <div> <p> My dob is {{dob}}</p> </div> 
+  <div> <p> My weight is {{weight}}</p> </div> 
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="entireBox">
+
+
+<div class="item">
+  <h1>Calorie log</h1>
+  <div>All Days' Logs</div>
+  <div id="chart-legend"></div>
+  <div id="chart"></div>
+</div>
+</div>
+{% endblock %}
