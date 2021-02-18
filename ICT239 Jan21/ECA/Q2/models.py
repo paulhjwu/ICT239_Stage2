@@ -99,8 +99,16 @@ def create_calorie_log(user_id, _datetime, weight, walking, running, swimming, b
     aCursor = db.calorieLogs.find(filter).limit(1)
 
     if aCursor.count() == 1:
+
         aRecord=aCursor.next()
-        aRecord['calorie']+=calorie
+        newCalorie = aRecord['calorie'] + calorie
+
+        # https://www.geeksforgeeks.org/python-mongodb-update_one/
+        
+        newValues = {  "$set" : { "calorie": newCalorie} }
+        
+        db.calorieLogs.update_one(filter, newValues)
+    
     else:
 
         aUser = fitwellUser.get_fitwellUser_byId(user_id)
