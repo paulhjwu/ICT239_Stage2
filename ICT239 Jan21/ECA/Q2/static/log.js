@@ -5,6 +5,7 @@ function postdata() {
   var run = $('.running').val();
   var swim = $('.swimming').val();
   var bike = $('.bicycling').val();
+  var dt = $('.datetime').val();
   debugger
   $.ajax({
   url:"http://127.0.0.1:5000/log",
@@ -12,6 +13,7 @@ function postdata() {
   data:{weight: weight,
   walk: walk,
   run: run,
+  datetime: dt,
   swim: swim,
   bike: bike}
   }).done(function(data){

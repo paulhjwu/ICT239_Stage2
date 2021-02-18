@@ -8,7 +8,7 @@ from flask import Flask, Response, flash, make_response, redirect, request, rend
 
 from app import app
 
-def register(email, password, weight, gender, dob):
+def register(email, password, weight, gender, dob, height):
 
     user = fitwellUser.get_user_byId(email=email) # if this returns a user, then the email already exists in database
 
@@ -17,7 +17,7 @@ def register(email, password, weight, gender, dob):
         return None
 
     # create new user with the form data. Hash the password so plaintext version isn't saved.
-    new_user = fitwellUser(email=email, password=generate_password_hash(password, method='sha256'), weight=float(weight), gender=gender, dob=dob)
+    new_user = fitwellUser(email=email, password=generate_password_hash(password, method='sha256'), weight=float(weight), gender=gender, dob=dob, height=float(height))
 
     return new_user
 

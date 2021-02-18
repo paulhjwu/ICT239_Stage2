@@ -40,6 +40,7 @@ def register():
         weight = request.form.get('weight')
         gender = request.form.get('gender')
         dob = request.form.get('datetime')
+        height = request.form.get('height')
     
         print(f"The email is {email}, the password is {password}, the weight is {weight}, and the gender is {gender}")
 
@@ -53,7 +54,7 @@ def register():
         # new_user = fitwellUser(email=email, password=generate_password_hash(password, method='sha256'), weight=float(weight), gender=gender, dob=dob)
         # return redirect(url_for('login'))
         try:
-            user=auth.register(email, password, weight, gender, dob)
+            user=auth.register(email=email, password=password, weight=weight, gender=gender, dob=dob, height=height)
             if user:
                 return redirect(url_for('login'))
             else:
@@ -133,21 +134,34 @@ def log():
         walk = float(request.form.get('walk'))
         swim = float(request.form.get('swim')) 
         bike = float(request.form.get('bike'))  
+        _date = request.form.get('datetime')
 
-        totalCal = 0
+        # if _date is not None:
+        
+        #     try:
+        #         _date = date.fromisoformat(_date)
+        #     except ValueError:
+        #         return {'error': 'date format should be YYYY-MM-DD'}, 400
+        
+        # totalCal = 0
 
-        if run != 0:
-            totalCal += (run * 0.21 * weight)
+        # if run != 0:
+        #     totalCal += (run * 0.21 * weight)
         
-        if swim != 0:
-            totalCal += (swim * 0.13 * weight)
+        # if swim != 0:
+        #     totalCal += (swim * 0.13 * weight)
         
-        if walk != 0:
-            totalCal += (walk * 0.084 * weight)
+        # if walk != 0:
+        #     totalCal += (walk * 0.084 * weight)
 
-        if bike != 0:
-            totalCal += (run * 0.064 * bike)
+        # if bike != 0:
+        #     totalCal += (run * 0.064 * bike)
         
+        user_id=current_user.record['email']
+        _datetime = datetime.strptime(_date, "%Y-%m-%dT%H:%M")
+        
+        totalCal = create_log(user_id, _datetime, weight, walk, run, swim, bike)
+
         return jsonify({'calorie': totalCal})
 
 @app.route("/logout")
