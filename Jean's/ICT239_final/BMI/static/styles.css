@@ -1,0 +1,198 @@
+/* CSS unuversal styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.fas {
+    color: #29553b;
+    font-size: 80px;
+}
+
+.outer-container {
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;          /*content not to go over to the next line if display in a smaller screen*/
+}
+
+.header-bar{
+    background-color: #e9cdc0;
+    padding: 0px 50px;
+    width: 1000px;
+    height: 120px;
+    top: 0;
+    order: 0;                   /* specifies the order of the flex items. Default is 0 */
+}
+
+.nav {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-items ul li{
+    display: inline-block;
+    font-size: 20px;
+    list-style: none;           /* remove the list (ul) dot */
+    font-family: 'Dosis, sans-serif';
+    color: #242834;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.logo {
+    width:100px;
+    height:100px;
+    margin-top: 20px;
+    margin-left: 5px;
+}
+
+.inner-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 1000px;
+    background-color: #FDFCFB;
+}
+
+.sidebar {
+    width:20%;
+    border: none;
+    text-align: center;
+    padding: 20px 10px;
+}
+
+.container {
+
+    /********************* Need to change width to 80% for Flex Layout *******************************/
+    width: 80%;         
+
+    /* width: 600px; */
+    margin: auto;               /*set the margin property to auto to horizontally center the element within its container.*/
+    display: grid;              /*grid-based layout system*/
+    grid-template-rows: repeat(6, 0.3fr);    /*To repeat 1 fraction (100%) of space to 6 rows  */
+    grid-template-columns: repeat(8, 1fr);  /*To repeat 1 fraction (100%) of space to 8 columns  */
+    background-color: rgb(240, 232, 232);
+    grid-row-gap: 2px;
+    grid-column-gap: 2px;
+}
+
+
+/*Start placement of objects into the rows and columns */
+/* grid items start position within the grid column  */
+/* If a n egative integer is given, it instead counts in reverse, starting from the end edge of the explicit grid */
+/* ROW 1:  h1 span across all columns*/
+.container h1 {
+    grid-column-start: 1;           
+    grid-column-end: -1;            
+    color: rgb(10, 10, 10);
+    text-align: center;
+    margin: auto;
+}
+
+/* ROW 2:  Label : Weight */
+.weight_label {
+    grid-column-start: 1;
+    grid-column-end: 4;             /* original is 5 - also depends on text length*/
+    font-size: 25px;
+    color: rgb(10, 10, 10);
+    font-weight: bold;
+    text-align: left;
+    /*border: 1px solid #000;*/
+}
+
+/* ROW 2:  Text input : Weight */
+.weight_input {
+    grid-column-start: 5;
+    grid-column-end: -1;
+    font-size: 25px;
+    color: rgb(10, 10, 10);
+    font-weight: bold;
+    text-align: left;
+    margin-right: 5px;
+    /*border: 1px solid #000;*/
+}
+
+/* ROW 3:  Label : Height */
+.height_label {
+    grid-column-start: 1;
+    grid-column-end: 5;             /*can change to 3 for example */
+    font-size: 25px;
+    color: rgb(10, 10, 10);
+    font-weight: bold;
+    text-align: left;
+    /*border: 1px solid #000;*/
+}
+
+/* ROW 3: Text Input : Height */
+.height_input {
+    grid-column-start: 5;           /*can change to 3 for example */
+    grid-column-end: -1;
+    font-size: 25px;
+    color: rgb(10, 10, 10);
+    font-weight: bold;
+    text-align: left;
+    margin-right: 5px;
+    /*border: 1px solid #000;*/
+}
+
+/* ROW 4: Radio Buttons (CM or M) */
+.pre_radio_space {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    text-align: center;
+    /*border: 1px solid #000;*/
+}
+
+/* ROW 4: bmi button */
+#bmi {
+    grid-column-start: 5;
+    grid-column-end: 7;                         /* -1 also can
+    display: inline-block;                      /*specifies the display behavior - can apply height and width values */
+    background-color: rgb(216, 210, 210);
+    opacity: 1;                                 /* style button to show it is clickable */
+    color: rgb(17, 16, 16);
+    font-size: 25px;
+    border: none;
+    width: 120px;
+    box-sizing: border-box;
+    /*border: 1px solid #000;*/
+}
+
+/* ROW 5: clear button */
+
+#clear{
+    grid-column-start: 7;
+    grid-column-end: 9;
+    display: inline-block;
+    background-color: rgb(121, 117, 117);
+    opacity: 0.4;                               /* style button to show it is not clickable */
+    color: rgb(17, 16, 16);
+    font-size: 25px; 
+    border: none;
+    width: 120px;
+    box-sizing: border-box;
+    /*border: 1px solid #000;*/
+}
+
+/* ROW 6: clear button */
+.output_space {
+    grid-column-start: 1;
+    grid-column-end: -1;
+    overflow-y: scroll;
+    height: 110px;
+    border: solid;
+    background-color: rgb(255, 255, 255);
+    /*border: 1px solid #000;*/
+}
+
+
+#bmi:hover {
+    background-color: rgb(207, 219, 241);
+}
+
+button#clear[usrOn="1"]:hover {                    /*userOn default 0 from html*/
+    background-color: rgb(207, 219, 241) !important;    /* This rule overrides all previous styling rules  */
+}

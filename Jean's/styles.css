@@ -1,0 +1,216 @@
+* {                             
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;    
+}
+
+
+.outer-container {
+    display: flex;
+    flex-direction: column; 
+    flex-wrap: nowrap
+}
+
+.header-bar{
+    background-color: #e9cbc0;
+    padding: 0px 50px;
+	width: 1000px;
+	height: 120px;
+	top: 0;
+	order: 0;      
+}
+
+.nav{
+	display: flex;
+	justify-content: space-between;   
+	align-items: center;          
+    background-color: #e9cbc0;
+}
+
+.nav-items ul{
+	padding: 0px;
+}
+
+.nav-items ul li{
+	display: inline-block;
+	font-size: 20px;
+	list-style: none;                   
+	font-family: 'Dosis', sans-serif;
+	color: #242834;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.logo{
+    width: 100px;
+	height: 100px;
+	margin-top: 20px;
+	margin-left: 5px;
+}
+
+img.center {
+    display: block;
+    margin: 0 auto;
+}
+
+
+.inner-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 1000px;
+    background-color: #FDFCFB;
+}
+
+/* Side Bar */
+
+.sideBar {
+	width: 20%;
+    border: none;
+    text-align: center;
+    padding: 20px 10px;
+}
+
+.fas {
+	color: #29553b;
+	font-size: 80px;
+}
+
+/* End Side Bar */
+
+
+.container {
+    width: 80%;         
+    margin: auto;               
+    display: grid;              
+    grid-template-rows: repeat(6, 0.3fr);    
+    grid-template-columns: repeat(8, 1fr); 
+    background-color: rgb(240, 232, 232);
+    grid-row-gap: 5px;
+    grid-column-gap: 5px;
+    align-items: center;
+}
+
+.container h1 {
+    grid-column-start: 1;           
+    grid-column-end: -1;            
+    color: rgb(10, 10, 10);
+    text-align: center;
+    margin: auto;
+}
+
+/* ROW 2:  Label : Weight */
+.weight_label {
+    grid-column-start: 1;
+    grid-column-end: 5;            
+    font-size: 25px;
+    color: rgb(10, 10, 10);
+    font-weight: bold;
+    text-align: left;
+    /*border: 1px solid #000;*/
+}
+
+/* ROW 2:  Text input : Weight */
+.weight_input {
+    grid-column-start: 5;
+    grid-column-end: -1;
+    font-size: 25px;
+    color: rgb(10, 10, 10);
+    font-weight: bold;
+    text-align: left;
+    margin-right: 5px;
+    /*border: 1px solid #000;*/
+}
+
+/* ROW 3:  Label : Height */
+.height_label {
+    grid-column-start: 1;
+    grid-column-end: 5;             
+    font-size: 25px;
+    color: rgb(10, 10, 10);
+    font-weight: bold;
+    text-align: left;
+    /*border: 1px solid #000;*/
+}
+
+/* ROW 3: Text Input : Height */
+.height_input {
+    grid-column-start: 5;           
+    grid-column-end: -1;
+    font-size: 25px;
+    color: rgb(10, 10, 10);
+    font-weight: bold;
+    text-align: left;
+    margin-right: 5px;
+}
+
+/* ROW 4: Radio Buttons (CM or M) */
+.pre_radio_space {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    text-align: center;
+}
+
+.m_radio {
+    grid-column-start: 5;
+    grid-column-end: 5;
+    text-align: center;
+}
+
+.cm_radio {
+    grid-column-start: 6;
+    grid-column-end: 6;
+    text-align: center;
+}
+
+/* ROW 4: bmi button */
+#bmi {
+    grid-column-start: 5;
+    grid-column-end: 7;                         
+    display: inline-block;                      
+    background-color: rgb(216, 210, 210);
+    opacity: 1;                                 
+    color: rgb(17, 16, 16);
+    font-size: 25px;
+    border: none;
+    width: 120px;
+    box-sizing: border-box;
+}
+
+/* ROW 5: clear button */
+#clear{
+    grid-column-start: 7;
+    grid-column-end: 9;
+    display: inline-block;
+    background-color: rgb(121, 117, 117);
+    opacity: 0.4;                              
+    color: rgb(17, 16, 16);
+    font-size: 25px; 
+    border: none;
+    width: 120px;
+    box-sizing: border-box;
+}
+
+/* ROW 6: clear button */
+.output_space {
+    grid-column-start: 1;
+    grid-column-end: -1;
+    overflow-y: scroll;
+    height: 110px;
+    border: solid;
+    background-color: rgb(255, 255, 255);
+}
+
+
+#bmi:hover {
+    background-color: rgb(207, 219, 241);
+}
+
+button#clear[usrOn="1"]:hover {                    
+    background-color: rgb(207, 219, 241) !important;    
+}
+
+.linkChart {
+    grid-column-start: 1;
+    grid-column-end: -1;
+}

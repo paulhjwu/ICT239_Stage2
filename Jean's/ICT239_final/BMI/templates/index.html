@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <link rel="stylesheet" href="../static/styles.css" />
+    <script src="https://kit.fontawesome.com/e5bb12379f.js" crossorigin="anonymous"></script>
+   
+</head>
+<body>
+
+    <div class="outer-container">
+
+        <!-- Create the Header Bar section -->
+        <div class="header-bar">
+            <nav class="nav">
+                <div class="logo">
+                    <img src="https://img.icons8.com/color/48/000000/bmi.png/" class="center" width="80" height="80">
+                </div>
+
+                <div class="nav-items">
+                    <ul>
+                        <li><a href='#'>Log in</a></li>
+                        <li><a href='#'>Register</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>  <!-- End of Header -->
+
+        <!-- Create the Side Bar-->
+        <div class="inner-container">
+            <div class="sidebar">
+                <i class="fas fa-user"></i>
+                <p>My id is: abc@gmail.com</p>
+                <p>My gender and weight</p>
+            </div>  <!-- End of Side bar-->
+       
+
+            <!-- BMI Calculator Content-->
+            <form>
+            <div class="container">
+                    <h1>BMI Calculator</h1>
+                    <label for="" class="weight_label">Weight (Kilogram)</label>
+                    <input type="text" class="weight_input" placeholder="kg" size="14">
+
+                    <label for="" class="height_label">Height</label>
+                    <input type="text" class="height_input" placeholder="m or cm" size="14">
+
+                    <div class="pre_radio_space"></div>
+
+                    <input type="radio" class="radio_m_input" id="m" name="unit" value="0">
+                    <label class="radio_m_label" for="">m</label>    
+                    <input type="radio" class="radio_cm_input" id="cm" name="unit" value="1">
+                    <label class="radio_cm_label" for="">cm</label>   
+
+                    <div class="pre_action_space"></div>
+
+                    <!-- Submit refer to submitting a form to the server -->
+                    <button class="r1" type="submit" id="bmi" origC="rgb(216,210,210)">Calculator</button>
+                    <button class="r2" type="button" id="clear" usrOn="0" origC="" origO="">Clear</button>
+                </form>
+                    <!-- Output area -->
+                    <div class="output_space">
+                        <p>The Output Area</p>
+                    </div>
+
+                    <div class="linkChart">
+                        <a href="BMI_Chart.html">Click to my BMI Chart</a>
+                    </div>
+            </div> <!-- End of Container-->
+        </div> <!-- End of inner-Container-->
+    </div> <!-- End of outer-container -->
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="../static/custom.js"></script>
+
+</body>
+</html>

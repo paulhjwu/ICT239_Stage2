@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <!--<link rel="stylesheet" href="static/styles.css" />-->
+    <script src="https://kit.fontawesome.com/e5bb12379f.js" crossorigin="anonymous"></script>
+   
+</head>
+<body>
+
+    <div class="outer-container">
+
+        <!-- Create the Header Bar section -->
+        <div class="header-bar">
+            <nav class="nav">
+                <div class="logo">
+                    <img src="https://img.icons8.com/color/48/000000/bmi.png/" class="center" width="80" height="80">
+                </div>
+
+                <div class="nav-items">
+                    <ul>
+                        <li><a href='#'>Log in</a></li>
+                        <li><a href='#'>Register</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>  <!-- End of Header -->
+
+        <!-- Create the Side Bar-->
+        <div class="inner-container">
+            <div class="sidebar">
+                <i class="fas fa-user"></i>
+                <p>My id is: abc@gmail.com</p>
+                <p>My gender and weight</p>
+            </div>  <!-- End of Side bar-->
+       
+
+            <!-- BMI Calculator Content-->
+            <div class="container">
+                    <h1>BMI Calculator</h1>
+                    <label for="" class="weight_label">Weight (Kilogram)</label>
+                    <input type="text" class="weight_input" placeholder="kg" size="14">
+
+                    <label for="" class="height_label">Height</label>
+                    <input type="text" class="height_input" placeholder="m or cm" size="14">
+
+                    <div class="pre_radio_space"></div>
+
+                    <input type="radio" class="radio_m_input" id="m" name="unit" value="0">
+                    <label class="radio_m_label" for="">m</label>    
+                    <input type="radio" class="radio_cm_input" id="cm" name="unit" value="1">
+                    <label class="radio_cm_label" for="">cm</label>   
+
+                    <div class="pre_action_space"></div>
+
+                    <button class="r1" type="button" id="bmi" origC="rgb(216,210,210)">Calculator</button>
+                    <button class="r2" type="button" id="clear" usrOn="0" origC="" origO="">Clear</button>
+
+                    <!-- Output area -->
+                    <div class="output_space">
+                        <p>The Output Area</p>
+                    </div>
+
+                    <div class="linkChart">
+                        <a href="BMI_Chart.html">Click to my BMI Chart</a>
+                    </div>
+            </div> <!-- End of Container-->
+        </div> <!-- End of inner-Container-->
+    </div> <!-- End of outer-container -->
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> <!-- CDN (Content Delivery Network) -->
+<script>
+
+    function bmi()
+    {
+        console.log("In the function");
+    
+        //Get weight and height from the inputs
+
+        let height = document.getElementsByClassName('height_input')[0].value;
+        console.log(height);
+    
+        let weight = document.querySelector(".weight_input").value;
+        console.log(weight);
+    
+    
+        //check if m or cm is selected
+        if (document.getElementById('m').checked)       // == true
+        {
+            //var bmi = weight / Math.pow(height, 2);     //BMI = mass/height (power2)
+            var aUnit = 'm';
+        }
+        else
+        {
+           //var bmi = weight / Math.pow(height/100, 2);
+           var aUnit = 'cm';
+        }
+    
+        //Clear outtput text 
+        if (document.querySelector(".output_space p").innerHTML == "The Output Area")
+        {
+            document.querySelector(".output_space p").innerHTML = ""
+        }
+    
+    
+        //Show bmi message in the output space
+        /*if (bmi < 18.5) {
+            document.querySelector(".output_space p").innerHTML += "Your Body Mass Index (BMI) is " + (Math.round(bmi).toFixed(2)) + "<br> Index value is underweight.<br>";
+        }
+        else if ((bmi >= 18.5) && (bmi <= 29.9))
+        {
+            document.querySelector(".output_space p").innerHTML += "Your Body Mass Index (BMI) is " + (Math.round(bmi).toFixed(2)) + "<br> Index value is normal.<br>";
+        }
+        else
+        {
+            document.querySelector(".output_space p").innerHTML += "Your Body Mass Index (BMI) is " + (Math.round(bmi).toFixed(2)) + "<br> Index value is overweight.<br>";
+        }*/
+
+        //Insert ajax codes to pass values to the back end for calculation
+
+        $.ajax({
+            url:"http://127.0.0.1:8001/bmi-ajax",
+            type: "POST",
+            data: {weight: weight,
+            height: height,
+            unit: aUnit},
+            dataType: 'json',
+            error: function() {
+                alert("Error");
+            },
+            success: function(data, status, xhr) {
+                
+                let bmi = data.bmi;
+                console.log(bmi);
+
+                if (bmi < 18.5) {
+                    document.querySelector(".output_space p").innerHTML += "Your Body Mass Index (BMI) is " + (Math.round(bmi).toFixed(2)) + "<br> Index value is underweight.<br>";
+                }
+                else if ((bmi >= 18.5) && (bmi <= 29.9))
+                {
+                    document.querySelector(".output_space p").innerHTML += "Your Body Mass Index (BMI) is " + (Math.round(bmi).toFixed(2)) + "<br> Index value is normal.<br>";
+                }
+                else
+                {
+                    document.querySelector(".output_space p").innerHTML += "Your Body Mass Index (BMI) is " + (Math.round(bmi).toFixed(2)) + "<br> Index value is overweight.<br>";
+                }
+            }
+
+        })
+
+
+    
+    
+        // Flip clear button to same is the calculate button background color and opacity
+        let clearBtn = document.getElementById("clear");
+        let calcBtn = document.getElementById("bmi");
+        
+        if (clearBtn.getAttribute("usrOn") == "0")          //Clear button is off
+        {
+            clearBtn.setAttribute("usrOn", "1");             // Set clear button to on
+            clearBtn.setAttribute("origC", getComputedStyle(clearBtn).backgroundColor);
+            clearBtn.setAttribute("origO", getComputedStyle(clearBtn).opacity);
+        }
+    
+        let color = calcBtn.getAttribute("origC");
+        let opacity = getComputedStyle(calcBtn).opacity;
+    
+        clearBtn.style.backgroundColor = color;
+        clearBtn.style.opacity = opacity;
+    
+    }       //End of bmi function
+    
+    function clear() {
+    
+        console.log("In clear function");
+    
+        document.querySelector(".output_space p").innerHTML = "The Output Area";
+    
+        /*Restore original color and opacity */
+        this.setAttribute("usrOn", "0")
+        let origO = this.getAttribute("origO");
+        let origC = this.getAttribute("origC")
+    
+        this.style.backgroundColor = origC
+        this.style.opacity = origO
+    
+        //clear inputs of weight and height
+        document.querySelector(".weight_input").value = ""
+        document.querySelector(".height_input").value = ""
+    
+    }
+    
+    
+    
+    //add event listener for buttons, call event handling functions
+    document.querySelector("#bmi").addEventListener("click", bmi);
+    document.querySelector("#clear").addEventListener("click", clear)
+    
+</script>
+
+
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.fas {
+    color: #29553b;
+    font-size: 80px;
+}
+
+.outer-container {
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;      
+}
+
+.header-bar{
+    background-color: #e9cdc0;
+    padding: 0px 50px;
+    width: 1000px;
+    height: 120px;
+    top: 0;
+    order: 0;               
+}
+
+.nav {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-items ul li{
+    display: inline-block;
+    font-size: 20px;
+    list-style: none;          
+    font-family: 'Dosis, sans-serif';
+    color: #242834;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.logo {
+    width:100px;
+    height:100px;
+    margin-top: 20px;
+    margin-left: 5px;
+}
+
+.inner-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 1000px;
+    background-color: #FDFCFB;
+}
+
+.sidebar {
+    width:20%;
+    border: none;
+    text-align: center;
+    padding: 20px 10px;
+}
+
+.container {
+    width: 80%;         
+    margin: auto;               
+    display: grid;              
+    grid-template-rows: repeat(6, 0.3fr);    
+    grid-template-columns: repeat(8, 1fr);  
+    background-color: rgb(240, 232, 232);
+    grid-row-gap: 2px;
+    grid-column-gap: 2px;
+}
+
+
+.container h1 {
+    grid-column-start: 1;           
+    grid-column-end: -1;            
+    color: rgb(10, 10, 10);
+    text-align: center;
+    margin: auto;
+}
+
+
+.weight_label {
+    grid-column-start: 1;
+    grid-column-end: 4;         
+    font-size: 25px;
+    color: rgb(10, 10, 10);
+    font-weight: bold;
+    text-align: left;
+
+}
+
+
+.weight_input {
+    grid-column-start: 5;
+    grid-column-end: -1;
+    font-size: 25px;
+    color: rgb(10, 10, 10);
+    font-weight: bold;
+    text-align: left;
+    margin-right: 5px;
+
+}
+
+
+.height_label {
+    grid-column-start: 1;
+    grid-column-end: 5;             
+    font-size: 25px;
+    color: rgb(10, 10, 10);
+    font-weight: bold;
+    text-align: left;
+
+}
+
+
+.height_input {
+    grid-column-start: 5;         
+    grid-column-end: -1;
+    font-size: 25px;
+    color: rgb(10, 10, 10);
+    font-weight: bold;
+    text-align: left;
+    margin-right: 5px;
+
+}
+
+
+.pre_radio_space {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    text-align: center;
+    
+}
+
+
+#bmi {
+    grid-column-start: 5;
+    grid-column-end: 7;                        
+    display: inline-block;                      
+    background-color: rgb(216, 210, 210);
+    opacity: 1;                                
+    color: rgb(17, 16, 16);
+    font-size: 25px;
+    border: none;
+    width: 120px;
+    box-sizing: border-box;
+    
+}
+
+
+
+#clear{
+    grid-column-start: 7;
+    grid-column-end: 9;
+    display: inline-block;
+    background-color: rgb(121, 117, 117);
+    opacity: 0.4;                              
+    color: rgb(17, 16, 16);
+    font-size: 25px; 
+    border: none;
+    width: 120px;
+    box-sizing: border-box;
+
+}
+
+
+.output_space {
+    grid-column-start: 1;
+    grid-column-end: -1;
+    overflow-y: scroll;
+    height: 110px;
+    border: solid;
+    background-color: rgb(255, 255, 255);
+   
+}
+
+
+#bmi:hover {
+    background-color: rgb(207, 219, 241);
+}
+
+button#clear[usrOn="1"]:hover {                   
+    background-color: rgb(207, 219, 241) !important;    
+}
+
+</style>
+    
+</body>
+</html>

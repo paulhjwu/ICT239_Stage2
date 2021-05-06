@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    <!------------------------------- (1) Added codes for fontawesome example ------------------------------->
+    <script src="https://kit.fontawesome.com/e5bb12379f.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div class="outer-container">
+    <div class="header-bar">
+        <nav class="nav">
+            <div class="logo">
+                <img class="center" width="80" height ="80" src="https://img.icons8.com/color/48/000000/bmi.png/">
+            </div>
+       
+            <div class="nav-items">
+                 <ul><li><a href="./index4.html">Log BMI</a></li></ul>
+            </div>
+        </nav>              
+    </div> <!-- End of header-bar div-->
+
+    <div class="inner-container">
+        <div class="sideBar">
+            <i class="fas fa-user"></i>
+            <div> <p> My id is: abc@def.com </p> </div>
+            <div> <p> My gender and weight </p></div> 
+        </div>   
+   
+
+        <div class="container">
+            <h1>BMI Calculator</h1>
+            
+            
+            <label for="" class="weight_label">Weight (kilogram)</label> 
+            <input type="text" class="weight_input" placeholder="kg" size="14">  
+            <label for="" class="height_label">Height</label>
+            <input type="text" class="height_input" placeholder="m or cm" size="14">
+
+            <!-- radio button for meter or centimeter-->
+            <!--<div class="pre_radio_space"> </div>-->
+            <div class="m_radio">
+            <input class="radio_m_input" type="radio" id="m" name="unit" value="0" checked>
+            <label class="radio_me_label" for="meter">m</label>
+            </div>
+            <div class="cm_radio">
+            <input class="radio_cm_input" type="radio" id="cm" name="unit" value="1">
+            <label class="radio_cm_label" for="centimeter">cm</label>
+            </div>
+
+            <div class="pre_action_space"> </div>
+            <button class="r1" type="button" id="bmi" origC="rgb(216, 210, 210)">Calculate</button> 
+            <button class="r2" type="button" id="clear" usrOn="0" origC="" origO="">Clear</button>
+            
+
+            <!-- Output area-->
+            <div class="output_space">
+                <p>The Output Area</p>
+            </div>
+
+            <div class="linkChart">
+                <a href="BMI_Chart.html">Click to my BMI Chart</a>
+            </div>
+        </div> <!-- End of Container div-->
+    </div> <!-- End of inner-container div -->
+</div> <!-- End of outer-container -->
+
+</body>
+</html>
