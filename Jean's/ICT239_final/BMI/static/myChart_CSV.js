@@ -13,8 +13,9 @@ var svg = d3.select("#my_dataviz")
           "translate(" + margin.left + "," + margin.top + ")");
 
 //Read the data
-var f = "Data35.csv";
-
+var f = "static/Data35.csv";
+// var f = "./Data35.csv";
+debugger
 d3.csv(f,
 
   // When reading the csv, I must format variables:
