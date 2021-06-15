@@ -6,12 +6,13 @@ console.log(msg);
 // https://stackoverflow.com/questions/14391690/how-to-capture-no-file-for-fs-readfilesync
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
 
-fileName = './final_result4.1.csv';
+fileName = 'final_result4.1.csv';
 
 function readByNode (fileName) {
 
     fs = require('fs')
     var fileContents;
+    var fileName=__dirname+'/'+fileName;
 
     var readings = {}; // {T-Group: [[date, cout], ...], ...}
 
