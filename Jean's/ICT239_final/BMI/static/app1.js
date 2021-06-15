@@ -14,6 +14,10 @@ function readByNode (fileName) {
     var fileContents;
     var fileName=__dirname+'/'+fileName;
 
+    console.log(fileName);
+
+    // Just a test
+
     var readings = {}; // {T-Group: [[date, cout], ...], ...}
 
     try {
