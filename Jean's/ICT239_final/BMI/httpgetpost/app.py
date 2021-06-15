@@ -72,7 +72,7 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
         if self.path == '/':
             try:
                 
-                with open(pwd + "/httpgetpost/BMI.html") as file:
+                with open(pwd + "/BMI/httpgetpost/BMI.html") as file:
                     data = file.read()
 
                 self._set_response()
@@ -112,7 +112,7 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
 
             self.wfile.write(json.dumps({'bmi' : bmi}).encode('utf-8'))
 
-            print(f'{bmi.:f})
+            print(f'{bmi:f}')
 
         return
 

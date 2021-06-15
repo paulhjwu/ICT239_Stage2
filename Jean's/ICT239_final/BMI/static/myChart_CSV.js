@@ -41,6 +41,7 @@ d3.csv(f,
     svg.append("g")
       .call(d3.axisLeft(y));
 
+    debugger
     // Add the line
     svg.append("path")
       .datum(data)

@@ -7,13 +7,9 @@ from werkzeug.security import generate_password_hash, check_password_hash
 #model - import 2 classes from models.py
 from models import fitwellUser, User
 
-
 #Login In
 from flask_login import login_user, logout_user, login_required, current_user
 from flask_login import LoginManager
-
-
-
 
 def create_app():
 

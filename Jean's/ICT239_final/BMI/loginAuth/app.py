@@ -2,10 +2,10 @@ from init import *
 
 app = create_app()
 
-
 #Route to the relevant webpage
 
 @app.route('/')
+@login_required #added in later
 def index():
     return render_template('index.html')
 
@@ -82,4 +82,4 @@ def logout():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=8000)
