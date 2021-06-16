@@ -1,7 +1,6 @@
 var msg = 'Hellow World'
 console.log(msg);
 
-
 // Javascript parameter passing https://stackoverflow.com/questions/10058814/get-data-from-fs-readfile 
 // https://stackoverflow.com/questions/14391690/how-to-capture-no-file-for-fs-readfilesync
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
@@ -78,7 +77,7 @@ function getReadings(fileContents) {
 //console.log(lDate)
 // // debugger
 
-function dataPrep(redings, bDate, lDate) {
+function dataPrep(readings, bDate, lDate) {
 
     var chartDim = {};
     var labels = [];

@@ -11,7 +11,8 @@ def index():
 
 @app.route('/chart')
 def chart():
-    return render_template('BMI_Chart.html')
+    # return render_template('BMI_Chart.html')
+    return render_template('BMI_Chart2.html')
 
 @app.route('/process', methods=['GET', 'POST'])
 def process():
