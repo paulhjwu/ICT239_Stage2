@@ -181,29 +181,44 @@ def chart3():
 
         return jsonify({'averages': aveDict})
 
-@app.route('/process', methods=['GET', 'POST'])
+@app.route('/process',methods= ['POST'])
 def process():
 
-    if request.method == 'GET':
-        #I want to get some data from the service
-        return render_template('index.html')    #do nothing but to show index.html
+    weight  = float(request.form['weight'])
+    height = float(request.form['height'])
 
-    elif request.method == 'POST':
-        #Get the values passed from the Front-end, do the BMI calculation, return the BMI back to front-end
+    if request.form['unit'] == 'm':
+        bmi = weight / math.pow(height, 2)
+    else:
+        bmi = weight / math.pow(height/100, 2)
 
-        weight = float(request.form['weight'])
-        height = float(request.form['height'])
-        unit = request.form['unit']
+    return jsonify({'bmi' : bmi})
 
-        if unit == 'm':
-            bmi = weight / math.pow(height, 2)
+# @app.route('/process', methods=['GET', 'POST'])
+# def process():
 
-        else:
-            bmi = weight / math.pow(height/100, 2)
+#     if request.method == 'GET':
+#         #I want to get some data from the service
+#         return render_template('index.html')    #do nothing but to show index.html
 
-        print(f'The BMI is {bmi}')
+#     elif request.method == 'POST':
+#         #Get the values passed from the Front-end, do the BMI calculation, return the BMI back to front-end
 
-        return jsonify({'bmi': bmi})
+#         weight = float(request.form['weight'])
+#         height = float(request.form['height'])
+#         unit = request.form['unit']
 
+#         if unit == 'm':
+#             bmi = weight / math.pow(height, 2)
 
-app.run(debug=True, host='0.0.0.0')
+#         else:
+#             bmi = weight / math.pow(height/100, 2)
+
+#         print(f'The BMI is {bmi}')
+
+#         return jsonify({'bmi': bmi})
+
+# app.run(debug=True, host='0.0.0.0')
+
+if __name__ == "__main__":
+  app.run(debug=True)
