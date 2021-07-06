@@ -1,0 +1,6 @@
+Flask
+dnspython
+pymongo
+flask-login
+flask-mail
+pandas

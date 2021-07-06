@@ -1,56 +1,153 @@
-// set the dimensions and margins of the graph
-var margin = {top: 10, right: 30, bottom: 30, left: 60},
-    width = 760 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
-
-// append the svg object to the body of the page
-var svg = d3.select("#my_dataviz")
-  .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
+var ctx = document.getElementById('myChart').getContext('2d');
 
 //Read the data
-var f = "static/Data35.csv";
+var f = "static/DataSet1.2.csv";
 // var f = "./Data35.csv";
-debugger
-d3.csv(f,
 
+function getReadings(data) {
+
+  debugger
+
+  var readings = {};
+  var bDate = new Date(3000, 0, 1);
+  var lDate = new Date(2000, 11, 31);
+
+  for (let i = 0; i < data.length -1; i++) {
+
+    var parts = data[i].date.split('-');
+    var myDate = new Date(parts[0], parts[1]-1, parts[2]);
+
+    if (myDate <= bDate) {
+        bDate = myDate;
+    }
+
+    if (myDate >= lDate) {
+        lDate = myDate;
+    }
+    
+    if ( readings[data[i].group] != null ) {
+        readings[data[i].group].push([data[i].date, data[i].value]);            
+    } else {
+        readings[data[i].group]=[[data[i].date, data[i].value]];
+    }
+    
+  }
+
+  // https://stackoverflow.com/questions/10221445/return-multiple-variables-from-a-javascript-function
+  //debugger
+  return [readings, bDate, lDate];
+
+}
+
+function dataPrep(readings, bDate, lDate) {
+
+  var chartDim = {};
+  var labels = [];
+
+  for (var d = bDate; d <= lDate; d.setDate(d.getDate() + 1)) {
+
+      var month = d.getUTCMonth() + 1; //months from 1-12
+      var day = d.getUTCDate() + 1;
+      var year = d.getUTCFullYear();
+
+      //debugger
+      var aDateString = year + "-" + month + "-" + day;
+      labels.push(aDateString);
+
+      for (const [key, value] of Object.entries(readings)) {
+
+          debugger
+          // https://stackoverflow.com/questions/455338/how-do-i-check-if-an-object-has-a-key-in-javascript 
+          if (!(key in chartDim)) {
+              chartDim[key]=[];
+          }
+          
+          i = 0;
+
+          let filled = false;
+
+          //debugger
+          for (const item of value) {
+
+              let parts=item[0].split('-');
+              let mydate = new Date(parts[0], parts[1] - 1, parts[2]); 
+              if (+mydate === +d) {
+                  debugger
+                  console.log(`${key}:${item[1]}`);
+                  chartDim[key].push(Number(item[1]));
+                  filled = true;
+              } else {
+                  if (+mydate > +d) {
+                      if (!filled) {
+                          chartDim[key].push(null);
+                      } 
+                      break;
+                  }
+              }
+          }
+      }
+  }
+
+  return [chartDim, labels];
+}
+
+
+d3.csv(f,
   // When reading the csv, I must format variables:
   function(d){
-    return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.value }
+    return { group : d.User, value : d.BMI, date: d.Date }
   },
-
   // Now I can use this dataset:
   function(data) {
 
-    // Add X axis --> it is a date format
-    var x = d3.scaleTime()
-      .domain(d3.extent(data, function(d) { return d.date; }))
-      .range([ 0, width ]);
-    svg.append("g")
-      .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x));
+    var bDate = new Date();
+    var lDate = new Date();
+    var readings = {};
+    var labels = [];
 
-    // Add Y axis
-    var y = d3.scaleLinear()
-      .domain([0, d3.max(data, function(d) { return +d.value; })])
-      .range([ height, 0 ]);
-    svg.append("g")
-      .call(d3.axisLeft(y));
+    // https://stackoverflow.com/questions/10221445/return-multiple-variables-from-a-javascript-function
+    var aData = getReadings(data);
+    readings = aData[0];
+    bDate = aData[1];
+    lDate = aData[2];
+    
+    var chartDim = {};
+    debugger
+    var aData = dataPrep(readings, bDate, lDate);
+    chartDim = aData[0];
+    xLabels = aData[1];
+
+    var vLabels = [];
+    var vData = [];
+
+    for (const [key, value] of Object.entries(chartDim)) {
+      vLabels.push(key);
+      vData.push(value);
+    } 
 
     debugger
-    // Add the line
-    svg.append("path")
-      .datum(data)
-      .attr("fill", "none")
-      .attr("stroke", "steelblue")
-      .attr("stroke-width", 1.5)
-      .attr("d", d3.line()
-        .x(function(d) { return x(d.date) })
-        .y(function(d) { return y(d.value) })
-        )
+    var myChart = new Chart(ctx, {
+      data: {
+      labels: xLabels,
+      datasets: []
+      },
+      options: {
+          responsive: false
+      }
+    });
+
+    debugger
+    for (i= 0; i < vLabels.length; i++ ) {
+      myChart.data.datasets.push({
+      label: vLabels[i],
+      type: "line",
+      // borderColor: '#'+(0x1ff0000+Math.random()*0xffffff).toString(16).substr(1,6),
+      borderColor: '#'+(0x1100000+Math.random()*0xffffff).toString(16).substr(1,6),
+      backgroundColor: "rgba(249, 238, 236, 0.74)",
+      data: vData[i],
+      spanGaps: true
+      });
+      myChart.update();
+    }
 
 })
