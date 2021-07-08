@@ -67,18 +67,37 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
 
         #Python method getcwd() returns current working directory of a process.
         pwd=os.getcwd()
+        print(pwd)
 
         # Concerning Step 3 
-        if self.path == '/':
+        if self.path == '/BMI_chart':
             try:
                 
-                with open(pwd + "/BMI/httpgetpost/BMI.html") as file:
+                with open(pwd + "/BMI_Chart.html") as file:
                     data = file.read()
 
                 self._set_response()
                 self.wfile.write(bytes(data, "utf8"))
 
             except:
+                self._set_response()
+                self.wfile.write(bytes(error_msg, "utf8"))
+
+            return
+
+        elif self.path == "/":
+
+            try:
+                
+                with open(pwd + "/BMI.html") as file:
+                    data = file.read()
+
+                self._set_response()
+                self.wfile.write(bytes(data, "utf8"))
+
+            except:
+
+                self._set_response()
                 self.wfile.write(bytes(error_msg, "utf8"))
 
             return
@@ -90,6 +109,7 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
         # Concerning Step 3 
         #BMI.html ajax url after click on calculate button
         if '/bmi-ajax' in self.path:  
+        
             content_length = int(self.headers['Content-Length']) # <--- Gets the size of data
             post_data = self.rfile.read(content_length) # <--- Gets the data itself
             logging.info("POST request,\nPath: %s\nHeaders:\n%s\n\nBody:\n%s\n",str(self.path), str(self.headers), post_data.decode('utf-8'))
@@ -110,12 +130,11 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
             else:
                 bmi = weight / math.pow(height/100, 2)
 
-            self.wfile.write(json.dumps({'bmi' : bmi}).encode('utf-8'))
-
             print(f'{bmi:f}')
 
+            self.wfile.write(json.dumps({'bmi' : bmi}).encode('utf-8'))
+        
         return
-
 
 
 # Create an object of the above class to handle HTTP request

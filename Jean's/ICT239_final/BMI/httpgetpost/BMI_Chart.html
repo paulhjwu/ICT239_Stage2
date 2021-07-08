@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Chart</title>
+</head>
+<body>
+    
+    <div class="container">
+        <h1> My BMI Chart</h1>
+        <!-- Create a div where the graph will take place -->
+        <div id="my_dataviz"></div>
+    </div>
+
+    <!-- Load d3.js -->
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script>
+
+        function drawChart(data) {
+            
+            // Add X axis --> it is a date format
+            var x = d3.scaleTime()
+            .domain(d3.extent(data, function(d) { return d.date; }))
+            .range([ 0, width ]);
+            svg.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x));
+
+            // Add Y axis
+            var y = d3.scaleLinear()
+            .domain([0, d3.max(data, function(d) { return +d.value; })])
+            .range([ height, 0 ]);
+            svg.append("g")
+            .call(d3.axisLeft(y));
+
+            // Add the line
+            svg.append("path")
+            .datum(data)
+            .attr("fill", "none")
+            .attr("stroke", "steelblue")
+            .attr("stroke-width", 1.5)
+            .attr("d", d3.line()
+                .x(function(d) { return x(d.date) })
+                .y(function(d) { return y(d.value) })
+                )
+        }
+
+        function successFunction(data) {
+            debugger;
+            var allRows = data.split(/\r?\n|\r/);
+            var aDictList = []
+
+            for (var singleRow = 0; singleRow < allRows.length; singleRow++) {
+                if (singleRow === 0) 
+                    continue;
+                else
+                    console.log(allRows[singleRow]);
+                    var rowCells = allRows[singleRow].split(',');
+                    aDictList.push({date: d3.timeParse("%Y-%m-%d")(rowCells[0]), value: rowCells[1]})
+            }
+            console.log(aDictList)
+            drawChart(aDictList)
+        }
+    // set the dimensions and margins of the graph
+        var margin = {top: 10, right: 30, bottom: 30, left: 60},
+            width = 760 - margin.left - margin.right,
+            height = 400 - margin.top - margin.bottom;
+
+        // append the svg object to the body of the page
+        var svg = d3.select("#my_dataviz")
+        .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+            .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")");
+
+        //Read the data
+        debugger
+        //var path = document.location.pathname;
+        //var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+        //console.log(directory)
+        var f = "https://raw.githubusercontent.com/paulhjwu/data/main/Data35.csv";
+        
+        fetch(f)
+        .then((response) => {
+            //The response that's returned will be in a JSON format
+            return response.text();
+        })
+        .then((data) => {
+            successFunction(data);
+            //drawChart(parseMyData)
+        })
+      
+
+    </script>
+    <!-- <script src="myChart_jSON.js"></script> -->
+
+</body>
+</html>
