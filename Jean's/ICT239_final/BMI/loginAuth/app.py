@@ -1,4 +1,4 @@
-1234from init import *
+from init import *
 
 app = create_app()
 
