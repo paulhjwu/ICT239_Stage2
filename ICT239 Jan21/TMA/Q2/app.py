@@ -191,14 +191,17 @@ def dashboard():
 @app.route("/api/recordings", methods=['GET'])
 def recordings():
     _date = request.args.get('date')
+    year, month, day = (int(x) for x in _date.split('-'))
+    aDate = datetime(year, month, day)
     
     if _date is not None:
         try:
-            _date = date.fromisoformat(_date)
+            assert datetime.isoformat(aDate) is not None
+            # _date = aDate.strftime("%Y-%m-%d")
         except ValueError:
             return {'error': 'date format should be YYYY-MM-DD'}, 400
     
-    recordings = get_recordings(_date)
+    recordings = get_recordings(aDate)
 
     return jsonify({'recordings': recordings})
 

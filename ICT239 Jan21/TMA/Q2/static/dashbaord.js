@@ -2,13 +2,14 @@ const STROKES = ["purple", "green", "black", "red",  "brown"];
 
 // Get the today's date as "YYYY-MM-DD" string
 
+debugger
 let chart_date = new Date();
 const offset = chart_date.getTimezoneOffset();
 chart_date = new Date(chart_date.getTime() - (offset*60*1000));
 chart_date = chart_date.toISOString().split('T')[0];
 
 // Fetch the data and plot the chart
-debugger
+
 fetch(`/api/recordings?date=${chart_date}`).then(response => {
     debugger
     if (response.status === 200) {
