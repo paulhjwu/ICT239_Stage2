@@ -25,7 +25,6 @@ app = create_app()
 # connection = pymongo.MongoClient('mongodb://localhost:27017')
 # db = connection['cluster']
 
-
 @app.route("/register", methods=['GET', 'POST'])
 def register():
 
@@ -39,7 +38,7 @@ def register():
         password = request.form.get('password')     # e.g. 'P@ssword'
         weight = request.form.get('weight')
         gender = request.form.get('gender')
-        dob = request.form.get('datetime')
+        dob = request.form.get('date')
     
         print(f"The email is {email}, the password is {password}, the weight is {weight}, and the gender is {gender}")
 
